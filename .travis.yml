@@ -10,4 +10,5 @@ before_install:
 python:
     - "3.6"
 script:
-    - curl -s --head http://localhost:8080/ApplicationStatus
+    - ls -la
+    - pytest
