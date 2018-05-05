@@ -1,5 +1,13 @@
+sudo: required
+
 language: python
+
+services:
+    - docker
+before_install:
+    - docker run --detach --name vespa --hostname vespa-container --privileged --publish 8080:8080 vespaengine/vespa
+    - docker exec vespa bash -c 'curl -s --head http://localhost:19071/ApplicationStatus'
 python:
     - "3.6"
 script:
-    - pytest
+    - curl -s --head http://localhost:8080/ApplicationStatus
